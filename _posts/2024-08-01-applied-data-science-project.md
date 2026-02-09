@@ -1,6 +1,6 @@
 ---
 layout: post
-author: Ricky
+author: Fevot
 title: "Applied Data Science Project Documentation"
 categories: ITD214
 ---
