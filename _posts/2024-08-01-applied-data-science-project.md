@@ -6,18 +6,18 @@ categories: ITD214
 ---
 ## Project Background
 
-Overview
+### Overview
 
 This project focuses on predicting competitive accommodation prices using machine learning models applied to an Airbnb-style listings dataset. An accurate price prediction model helps hosts make data-driven pricing decisions aligned with market conditions.
 
-Business Objective
+### Business Objective
 
 The primary business objective is to predict listing prices accurately based on a limited but meaningful set of property, host, and location attributes. The model is intended to support:
 * Competitive pricing strategies for hosts
 *  Market benchmarking against similar listings
 *   Decision-making for new or underperforming properties
 
-Problem Statement
+### Problem Statement
 
 Given historical listing data, how can we build a robust predictive model that:
 * Accurately estimates listing prices
