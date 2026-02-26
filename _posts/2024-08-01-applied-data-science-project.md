@@ -1,8 +1,8 @@
 ---
-layout: post
-author: Seah Wee Kee
-title: "Applied Data Science Project Documentation"
-categories: ITD214
+Layout: post
+Author: Seah Wee Kee
+Title: "Applied Data Science Project Documentation"
+Categories: ITD214
 ---
 ## Project Background
 
