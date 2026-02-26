@@ -11,9 +11,9 @@ This project focuses on predicting competitive accommodation prices using machin
 
 Business Objective
 The primary business objective is to predict listing prices accurately based on a limited but meaningful set of property, host, and location attributes. The model is intended to support:
-a) Competitive pricing strategies for hosts
-b) Market benchmarking against similar listings
-c) Decision-making for new or underperforming properties
+* Competitive pricing strategies for hosts
+*  Market benchmarking against similar listings
+*   Decision-making for new or underperforming properties
 
 Problem Statement
 Given historical listing data, how can we build a robust predictive model that:
