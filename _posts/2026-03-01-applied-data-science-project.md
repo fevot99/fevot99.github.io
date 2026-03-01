@@ -96,6 +96,8 @@ Fine Tuned Gradient Boosting model performance improved slightly to 55.58% and w
 #### Model Price Predictions
 The trained Gradient Boosting model is applied to actual Airbnb listing provided by Andreas and below are the predictions:
 
+<img width="1056" height="383" alt="image" src="https://github.com/user-attachments/assets/67dca7b7-5b80-4dc7-bc01-b8033000c0be" />
+
 Underpriced Listings and the % difference
 * Downtown Core: 314 → Predicted: 356 (+13.5%)
 * Downtown Core: 319 → Predicted: 343 (+7.6%)
