@@ -155,6 +155,6 @@ The predictive model output is to support human decision making. The customers a
 The gradient boosting ML model is less interpretable than linear models. We should also analyse the features importance (like location, reviews, amenities etc) with customers to explain the drivers of pricing.
 
 ## Source Codes and Datasets
-The Colab notebook, Airbnb sg listing (train) dataset and actual Andreas listings are attached below:
+The Colab notebook, Airbnb sg listing (train) dataset and actual Andreas listings used for this project are as attached:
 [ITD214_Project_v3_3.zip](https://github.com/user-attachments/files/25657680/ITD214_Project_v3_3.zip)
 
