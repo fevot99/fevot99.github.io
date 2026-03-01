@@ -124,7 +124,7 @@ b) Medium Term Approach
 c) Long Term Approach
 * Collect additional data and train the ML model to predict pricing based on seasonality, events, weekend vs weekday pricing etc
 
-#### Analysis and Conclusion
+## Conclusion
 
 The chosen Gradient Boosting ML model has an R² of 0.5558 and an RMSE of $661.03. However, it is noted that the median rental price of the train dataset is only $345.26. As RMSE measures the average size of prediction error, this means on average the predictions are off by about $661, based on median listing of $345. Thus, the model is still inaccurate and predictions are not usable for pricing decisions.
 
