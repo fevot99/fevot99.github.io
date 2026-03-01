@@ -45,11 +45,9 @@ The problem statement is to develop a ML model that predicts the optimal nightly
 4. Missing values for review scores:
 * Fill in 1252 rows for numeric columns with median
 
-5. Feature Engineering for “amenities” column (object)
-Values in “amenities” column is a list of items, for example:
+5. Feature Engineering for “amenities” column
 
-* Count number of amenities items per row (more amenities is better)
-* Create new numeric column “amenities_count” = sum of total number of amenities
+The “amenities” column is a list of items (eg refrigerator, hair dryer). The number of items is summed up and a new numeric variable called “amenities_count” is created, which is sum of total number of amenities.
 
 6. Encode categorical features:
 * Fill in missing values (for categorical) with mode
@@ -60,7 +58,7 @@ Values in “amenities” column is a list of items, for example:
 
 ## Modelling
 
-The Airbnb train dataset is split into 2 partition based on 80/20 (Train/Test) set to allow fair evaluation of model performance. In total, 3 different ML model algorithms are trained as follow:
+The Airbnb train dataset is split into 2 partition based on 80/20 train-test set to allow fair evaluation of model performance. In total, 3 different ML model algorithms are trained as follow:
 
 1. Linear Regression - Classical linear model with feature scaling
 * Simple, interpretable
@@ -85,9 +83,7 @@ The models were evaluated using the two metrics below:
 * R² (Coefficient of Determination) – measures how much variance in price is explained
 * RMSE (Root Mean Squared Error) – measures average prediction error magnitude (pricing error in monetary term)
 
-Gradient Boosting achieved the highest R² and lowest RMSE score of Test R²: 0.5386, Test RMSE: $673.74.
-
-Gradient Boosting Regression model was selected as the final model as it provided the most accurate price predictions
+Gradient Boosting achieved the highest R² and lowest RMSE score of Test R²: 0.5386, Test RMSE: $673.74. Gradient Boosting Regression model was selected as the final model as it provided the most accurate price predictions
 
 #### Gradient Boosting HyperParameter Tuning
 The Gradient Boosting model has very high Train R² score of 0.9964, and lower Test R² score of 0.5386. This indicates model overfitting and the below fine tuning was done:
@@ -97,6 +93,20 @@ The Gradient Boosting model has very high Train R² score of 0.9964, and lower T
 
 Fine Tuned Gradient Boosting model performance improved slightly to 55.58% and will be used for actual price prediction
 
+#### Model Price Predictions
+The trained Gradient Boosting model is applied to actual Airbnb listing provided by Andreas and below are the predictions:
+
+Underpriced Listings and the % difference
+* Downtown Core: 314 → Predicted: 356 (+13.5%)
+* Downtown Core: 319 → Predicted: 343 (+7.6%)
+* Rochor: 271 → Predicted: 319 (+17.7%)
+* Outram: 321 → Predicted: 394 (+22.9%)
+
+Overpriced Listings and the % difference
+* Downtown Core: 559 → Predicted: 524 (−6.3%)
+
+Fairly Priced Listings and the % difference
+*Rochor: 257 → Predicted: 254 (~1%)
 
 ## Recommendation and Analysis
 
