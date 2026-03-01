@@ -8,119 +8,135 @@ Categories: ITD214
 
 #### Overview
 
-This project focuses on predicting competitive accommodation prices using machine learning models applied to an Airbnb-style listings dataset. An accurate price prediction model helps hosts make data-driven pricing decisions aligned with market conditions.
+This project focuses on predicting competitive Airbnb rental prices using ML models applied to an Airbnb listings dataset. The price prediction model will help Airbnb hosts make data-driven pricing decisions based on market conditions.
 
 #### Business Objective
 
-The primary business objective is to predict listing prices accurately based on a limited but meaningful set of property, host, and location attributes. The model is intended to support:
+The business objective is to assist our customer Andreas (Airbnb host) set competitive and profitable rental prices for his properties using machine learning. The ML model will predict optimal pricing based on property features, location, host, amenities, and market conditions attributes. The ML model can be used for the follow:
 * Competitive pricing strategies for hosts
-*  Market benchmarking against similar listings
-*   Decision-making for new or underperforming properties
+* Market benchmarking against similar listings
+* Decision-making for new or underperforming properties
 
 #### Problem Statement
 
-Given historical listing data, how can we build a robust predictive model that:
-* Accurately estimates listing prices
-*  Generalizes well across different neighborhoods and room types
-* Balances interpretability and predictive performance
-
+The problem statement is to develop a ML model that predicts the optimal nightly rental price for Andreas’s Airbnb listings, based on historical Airbnb listng data. This will help to maximize occupancy and revenue while remaining competitive in the local market. The target variable is “price”, which is the nightly rental rate in USD.
 
 ## Work Accomplished
 
-### Data Preparation
-8 key features was selected:
-Numeric features (5)
-Accommodates
-Review scores value
-Number of reviews
-Amenities count
-Minimum nights
-Host is superhost
-Neighbourhood
-Room type
+#### Data Preparation
 
-Data cleaning included:
-a) Handling missing values using median imputation for numeric variables
-b) Encoding categorical variables using one-hot encoding
-c) Removing outliers and ensuring price values were valid and consistent
-d) The final dataset was split into training and testing sets to allow fair evaluation of model performance.
+1. Drop unnecessary columns, retain the below 8 selected features and 1 target "price" column
+* a) accommodates      - Number of guests the listing can accommodate
+* b) bedrooms          - Number of bedrooms
+* c) neighbourhood     - Location/area (categorical)
+* d) room_type         - Type of accommodation (categorical)
+* e) review_scores     - Average guest rating
+* f) number_of_reviews - Total review count (social proof)
+* g) amenities_count   - Total number of amenities
+* g) minimum_nights    - Minimum stay requirement
 
-### Modelling
+2. Clean up target “price” column as follow
+* Remove “$” in price column
+* Convert column type from object to numeric
+* Remove 1050 rows with missing price information
 
-Three regression models were developed and evaluated:
-a) Linear Regression
-Served as a baseline model
-Simple and interpretable but limited in capturing non-linear relationships
-b) Random Forest Regression
-Captured non-linear interactions
-More robust than linear regression
-Showed improved accuracy but some variance in predictions
-c) Gradient Boosting Regression
-Built sequentially to correct previous errors
-Strong at modeling complex patterns
-Demonstrated the best overall performance
+2. Convert feature “host_is_superhost” from Boolean to binary <True=1, False=0>
 
-Each model was trained using the same feature set and evaluated using identical test data to ensure a fair comparison.
+3. Missing values for review scores:
+* Fill in 1252 rows for numeric columns with median
 
-### Evaluation
+4. Feature Engineering for “amenities” column (object)
+Values in “amenities” column is a list of items, for example:
 
-Model Assessment Criteria
-The models were evaluated using:
-a) R² (Coefficient of Determination) – measures how much variance in price is explained
-b) RMSE (Root Mean Squared Error) – measures average prediction error magnitude
+* Count number of amenities items per row (more amenities is better)
+* Create new numeric column “amenities_count” = sum of total number of amenities
 
-Among the three models:
+5. Encode categorical features:
+* Fill in missing values (for categorical) with mode
+* Encode Neighbourhood/Area (40 categories)
+* Encode Room type (4 categories)
 
-Linear Regression underperformed due to its inability to model complex relationships
-Random Forest improved performance but showed diminishing returns
-Gradient Boosting achieved the highest R² and lowest RMSE
+6. Verify the processed clean dataset for ML training
 
-Final Model Choice
-Gradient Boosting Regression was selected as the final model because:
-It provided the most accurate price predictions
-It effectively handled non-linear interactions between features
-It minimized large pricing errors, which is critical for revenue optimization
+## Modelling
+
+The Airbnb train dataset is split into 2 partition based on 80/20 (Train/Test) set to allow fair evaluation of model performance. In total, 3 different ML model algorithms are trained as follow:
+
+1. Linear Regression - Classical linear model with feature scaling
+* Simple, interpretable
+* Assume linear relationships
+* Train R²: 0.0452, Test R²: 0.0283, Test RMSE: $977.69
+
+2.      Random Forest Regression - Ensemble of 100 decision trees
+* Construct many independent trees and aggregating predictions
+* Capture non-linear relationships
+* Robust to outliers
+* Train R²: 0.7275, Test R²: 0.4629, Test RMSE: $726.91
+
+3.      Gradient Boosting - Sequential boosting algorithm
+* Sequentially combining weak learners to create a strong predictive model
+* High predictive accuracy
+* Handle complex interactions
+Train R²: 0.9964, Test R²: 0.5386, Test RMSE: $673.74
+
+## Evaluation
+
+The models were evaluated using the two metrics below:
+* R² (Coefficient of Determination) – measures how much variance in price is explained
+* RMSE (Root Mean Squared Error) – measures average prediction error magnitude (pricing error in monetary term)
+
+Gradient Boosting achieved the highest R² and lowest RMSE score of Test R²: 0.5386, Test RMSE: $673.74.
+
+Gradient Boosting Regression model was selected as the final model as it provided the most accurate price predictions
+
+#### Gradient Boosting HyperParameter Tuning
+The Gradient Boosting model has very high Train R² score of 0.9964, and lower Test R² score of 0.5386. This indicates model overfitting and the below fine tuning was done:
+* Increase the n_estimators (from 100 to 200) to give the model more steps to fix errors
+* Decrease the max_depth (from 8 to 5) so that model capture less noise
+* Lower the learning_rate (from 0.01 to 0.05), to avoid local minima
+
+Fine Tuned Gradient Boosting model performance improved slightly to 55.58% and will be used for actual price prediction
+
 
 ## Recommendation and Analysis
 
-Business Evaluation
-The final model aligns well with the business objective:
-Predicts prices competitively based on market and property attributes
-Helps hosts identify under- or over-priced listings
-Supports data-driven pricing decisions rather than intuition
+The below 3 recommended apporach are suggested:
 
-Issues That Could Have Been Addressed Earlier
-Limited availability of temporal data (e.g., seasonality, holidays)
-Lack of demand-side signals such as booking rates
-Potential neighborhood granularity differences affecting price sensitivity
+a) Short Term Approach
+* Consider raising prices on 4 underpriced listings (Outram & Rochor)
+* Consider reducing prices on 1 overpriced listing (Downtown Core)
+* Use ML model as a decision-support tool for new listings
 
-Recommendations
-Incorporate time-based features (weekends, peak seasons)
-Add demand indicators such as availability rates
-Periodically retrain the model to reflect market changes
-Provide hosts with price ranges rather than single point estimates
+b) Medium Term Approach
+* Improve features that drive higher predicted prices such as amenities count, review scores, number of reviews
+* Re-run predictions monthly to review
 
-## AI Ethics
+c) Long Term Approach
+* Collect additional data and train the ML model to predict pricing based on seasonality, events, weekend vs weekday pricing etc
 
-Privacy
-All personal identifiers were excluded
-Only aggregated, non-sensitive listing information was used
+#### Analysis and Conclusion
 
-Fairness
-Location-based features may unintentionally reflect socioeconomic bias
-Regular audits are needed to ensure pricing recommendations do not unfairly disadvantage certain neighborhoods
+The chosen Gradient Boosting ML model has an R² of 0.5558 and an RMSE of $661.03. However, it is noted that the median rental price of the train dataset is only $345.26. As RMSE measures the average size of prediction error, this means on average the predictions are off by about $661, based on median listing of $345. Thus, the model is still inaccurate and predictions are not usable for pricing decisions.
 
-Accuracy
-Inaccurate predictions can lead to financial loss
-Continuous monitoring and retraining are required to maintain reliability
+One possible explanation for the large RMSE is that there are extreme outliers in the train dataset. Upon further study, it is discovered that there are 24  luxury listings with price from $3,000 $13,000 that may be skewing error, based on median of $345. The outliers constitute about 1% of total 2600 listing in train dataset. The top 1% outliers should be removed as part of future data processing and model training.
 
-Accountability
-Model outputs should support, not replace, human decision-making
-Hosts should be informed that predictions are probabilistic, not guarantees
 
-Transparency
-Gradient Boosting is less interpretable than linear models
-Feature importance analysis should be shared with stakeholders to explain pricing drivers
+##  AI Ethics
+
+#### Privacy
+It is checked that all personal identifiers were excluded and only aggregated, non-sensitive listing information was used.
+
+#### Fairness
+Some features may unintentionally reflect bias. It is noted that regular audits are needed to ensure pricing recommendations do not unfairly disadvantage certain listings.
+
+#### Accuracy
+It is noted that inaccurate predictions maybe lead to financial loss, so monitoring and model re-training are required to maintain reliability.
+
+#### Accountability
+The predictive model output is to support human decision making. The customers are informed that predictions are probabilistic prices, which are not guaranteed.
+
+#### Transparency
+The gradient boosting ML model is less interpretable than linear models. We should also analyse the features importance (like location, reviews, amenities etc) with customers to explain the drivers of pricing.
 
 ## Source Codes and Datasets
 Upload your model files and dataset into a GitHub repo and add the link here. 
