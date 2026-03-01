@@ -56,6 +56,8 @@ The “amenities” column is a list of items (eg refrigerator, hair dryer). The
 
 7. Verify the processed clean dataset for ML training
 
+<img width="1074" height="398" alt="image" src="https://github.com/user-attachments/assets/cc42fa71-4b5f-44f5-b110-502128f8c6b1" />
+
 ## Modelling
 
 The Airbnb train dataset is split into 2 partition based on 80/20 train-test set to allow fair evaluation of model performance. In total, 3 different ML model algorithms are trained as follow:
@@ -82,6 +84,8 @@ The Airbnb train dataset is split into 2 partition based on 80/20 train-test set
 The models were evaluated using the two metrics below:
 * R² (Coefficient of Determination) – measures how much variance in price is explained
 * RMSE (Root Mean Squared Error) – measures average prediction error magnitude (pricing error in monetary term)
+
+<img width="633" height="180" alt="image" src="https://github.com/user-attachments/assets/0f28da30-b19c-49bf-824d-8eb024bd8649" />
 
 Gradient Boosting achieved the highest R² and lowest RMSE score of Test R²: 0.5386, Test RMSE: $673.74. Gradient Boosting Regression model was selected as the final model as it provided the most accurate price predictions
 
