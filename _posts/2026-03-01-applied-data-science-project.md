@@ -13,9 +13,9 @@ This project focuses on predicting competitive Airbnb rental prices using ML mod
 #### Business Objective
 
 The business objective is to assist our customer Andreas (Airbnb host) set competitive and profitable rental prices for his properties using machine learning. The ML model will predict optimal pricing based on property features, location, host, amenities, and market conditions attributes. The ML model can be used for the follow:
-* Competitive pricing strategies for hosts
-* Market benchmarking against similar listings
-* Decision-making for new or underperforming properties
+* Provide competitive pricing analysis for hosts
+* Benchmark against similar listings in the market
+* Support decision making for new or underperforming properties
 
 #### Problem Statement
 
@@ -40,23 +40,23 @@ The problem statement is to develop a ML model that predicts the optimal nightly
 * Convert column type from object to numeric
 * Remove 1050 rows with missing price information
 
-2. Convert feature “host_is_superhost” from Boolean to binary <True=1, False=0>
+3. Convert feature “host_is_superhost” from Boolean to binary <True=1, False=0>
 
-3. Missing values for review scores:
+4. Missing values for review scores:
 * Fill in 1252 rows for numeric columns with median
 
-4. Feature Engineering for “amenities” column (object)
+5. Feature Engineering for “amenities” column (object)
 Values in “amenities” column is a list of items, for example:
 
 * Count number of amenities items per row (more amenities is better)
 * Create new numeric column “amenities_count” = sum of total number of amenities
 
-5. Encode categorical features:
+6. Encode categorical features:
 * Fill in missing values (for categorical) with mode
 * Encode Neighbourhood/Area (40 categories)
 * Encode Room type (4 categories)
 
-6. Verify the processed clean dataset for ML training
+7. Verify the processed clean dataset for ML training
 
 ## Modelling
 
@@ -67,17 +67,17 @@ The Airbnb train dataset is split into 2 partition based on 80/20 (Train/Test) s
 * Assume linear relationships
 * Train R²: 0.0452, Test R²: 0.0283, Test RMSE: $977.69
 
-2.      Random Forest Regression - Ensemble of 100 decision trees
+2. Random Forest Regression (Ensemble of 100 decision trees)
 * Construct many independent trees and aggregating predictions
 * Capture non-linear relationships
 * Robust to outliers
 * Train R²: 0.7275, Test R²: 0.4629, Test RMSE: $726.91
 
-3.      Gradient Boosting - Sequential boosting algorithm
+3. Gradient Boosting (Sequential boosting algorithm)
 * Sequentially combining weak learners to create a strong predictive model
 * High predictive accuracy
 * Handle complex interactions
-Train R²: 0.9964, Test R²: 0.5386, Test RMSE: $673.74
+* Train R²: 0.9964, Test R²: 0.5386, Test RMSE: $673.74
 
 ## Evaluation
 
