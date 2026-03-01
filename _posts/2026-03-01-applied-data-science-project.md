@@ -26,14 +26,14 @@ The problem statement is to develop a ML model that predicts the optimal nightly
 #### Data Preparation
 
 1. Drop unnecessary columns, retain the below 8 selected features and 1 target "price" column
-* a) accommodates      - Number of guests the listing can accommodate
-* b) bedrooms          - Number of bedrooms
-* c) neighbourhood     - Location/area (categorical)
-* d) room_type         - Type of accommodation (categorical)
-* e) review_scores     - Average guest rating
-* f) number_of_reviews - Total review count (social proof)
-* g) amenities_count   - Total number of amenities
-* g) minimum_nights    - Minimum stay requirement
+a) accommodates      - Number of guests the listing can accommodate
+b) bedrooms          - Number of bedrooms
+c) neighbourhood     - Location/area (categorical)
+d) room_type         - Type of accommodation (categorical)
+e) review_scores     - Average guest rating
+f) number_of_reviews - Total review count (social proof)
+g) amenities_count   - Total number of amenities
+g) minimum_nights    - Minimum stay requirement
 
 2. Clean up target “price” column as follow
 * Remove “$” in price column
@@ -106,7 +106,7 @@ Overpriced Listings and the % difference
 * Downtown Core: 559 → Predicted: 524 (−6.3%)
 
 Fairly Priced Listings and the % difference
-*Rochor: 257 → Predicted: 254 (~1%)
+* Rochor: 257 → Predicted: 254 (~1%)
 
 ## Recommendation and Analysis
 
@@ -149,4 +149,4 @@ The predictive model output is to support human decision making. The customers a
 The gradient boosting ML model is less interpretable than linear models. We should also analyse the features importance (like location, reviews, amenities etc) with customers to explain the drivers of pricing.
 
 ## Source Codes and Datasets
-Upload your model files and dataset into a GitHub repo and add the link here. 
+The model files and dataset are uploaded into a GitHub repo. The link is as follow:. 
